@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Menú Desplegable</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('class.png'); 
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 100vh;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 150px;
+    }
+
+    .titulo-central {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: #0f0f0f;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+      z-index: 1001;
+    }
+
+    nav {
+      margin-top: 200px;
+      background-color: rgba(0, 0, 0, 0.8);
+      text-align: center;
+    }
+
+    ul.menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline-flex;
+    }
+
+    ul.menu > li {
+      position: relative;
+    }
+
+    ul.menu > li > a {
+      display: block;
+      padding: 14px 20px;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    ul.menu > li > a:hover {
+      background-color: #555;
+    }
+
+    .submenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #444;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      min-width: 160px;
+      z-index: 1000;
+    }
+
+    .submenu li a {
+      display: block;
+      padding: 12px 16px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .submenu li a:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo y título -->
+  <img src="ube.png" alt="Logo" class="logo">
+  <div class="titulo-central">TAREA PRÁCTICA 2 - EJERCICIO 07 - JOHNNY ALVARADO</div>
+
+  <!-- Menú -->
+  <nav>
+    <ul class="menu">
+      <li>
+        <a onclick="toggleSubmenu('submenu1')">Inicio</a>
+        <ul id="submenu1" class="submenu">
+          <li><a href="#">Inicio 1</a></li>
+          <li><a href="#">Inicio 2</a></li>
+        </ul>
+      </li>
+      <li>
+        <a onclick="toggleSubmenu('submenu2')">Servicios</a>
+        <ul id="submenu2" class="submenu">
+          <li><a href="#">Web</a></li>
+          <li><a href="#">Móvil</a></li>
+          <li><a href="#">Consultoría</a></li>
+        </ul>
+      </li>
+      <li>
+        <a onclick="toggleSubmenu('submenu3')">Contacto</a>
+        <ul id="submenu3" class="submenu">
+          <li><a href="#">Email</a></li>
+          <li><a href="#">Teléfono</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <script>
+    function toggleSubmenu(id) {
+      const submenus = document.querySelectorAll('.submenu');
+      submenus.forEach(menu => {
+        if (menu.id !== id) {
+          menu.style.display = 'none';
+        }
+      });
+
+      const submenu = document.getElementById(id);
+      submenu.style.display = (submenu.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Ocultar submenús al hacer clic fuera del menú
+    document.addEventListener('click', function(event) {
+      const isClickInsideMenu = event.target.closest('nav');
+      if (!isClickInsideMenu) {
+        document.querySelectorAll('.submenu').forEach(menu => {
+          menu.style.display = 'none';
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reloj Analógico con Números</title>
+  <style>
+    body {
+      background-image: url('fondoreloj.png'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      flex-direction: column;
+    }
+
+    .logo {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      height: 150px;
+    }
+
+    .titulo {
+      color: white;
+      font-size: 35px;
+      font-weight: bold;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .reloj {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      background: #fff;
+      border-radius: 50%;
+      border: 8px solid #333;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .numero {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+      color: #333;
+      user-select: none;
+      transform-origin: center center;
+    }
+
+    .manecilla {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      background: #333;
+      border-radius: 4px;
+      transform-origin: bottom center;
+      transition: transform 0.1s ease-in-out;
+    }
+
+    .hora {
+      width: 10px;
+      height: 80px;
+      z-index: 3;
+      background: #222;
+    }
+
+    .minuto {
+      width: 6px;
+      height: 120px;
+      z-index: 2;
+      background: #555;
+    }
+
+    .segundo {
+      width: 2px;
+      height: 140px;
+      background: red;
+      z-index: 1;
+      border-radius: 1px;
+    }
+
+    .centro {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #333;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <img src="ube.png" alt="Logo" class="logo">
+
+  <!-- Título centrado -->
+  <div class="titulo">Tarea Practica 2 - Ejercicio 04 - Johnny Alvarado</div>
+
+  <!-- Reloj -->
+  <div class="reloj" id="reloj">
+    <div class="manecilla hora" id="hora"></div>
+    <div class="manecilla minuto" id="minuto"></div>
+    <div class="manecilla segundo" id="segundo"></div>
+    <div class="centro"></div>
+  </div>
+
+  <script>
+    const reloj = document.getElementById('reloj');
+
+    for (let i = 1; i <= 12; i++) {
+      const numero = document.createElement('div');
+      numero.classList.add('numero');
+      numero.textContent = i;
+
+      const angulo = (i * 30) - 90;
+      const radio = 130;
+
+      const x = 160 + radio * Math.cos(angulo * Math.PI / 180) - 15;
+      const y = 160 + radio * Math.sin(angulo * Math.PI / 180) - 15;
+
+      numero.style.left = `${x}px`;
+      numero.style.top = `${y}px`;
+
+      reloj.appendChild(numero);
+    }
+
+    function actualizarReloj() {
+      const ahora = new Date();
+      const segundos = ahora.getSeconds();
+      const minutos = ahora.getMinutes();
+      const horas = ahora.getHours();
+
+      const gradosSegundos = segundos * 6;
+      const gradosMinutos = minutos * 6 + (segundos / 60) * 6;
+      const gradosHoras = ((horas % 12) * 30) + (minutos / 60) * 30;
+
+      document.getElementById('segundo').style.transform = `rotate(${gradosSegundos}deg)`;
+      document.getElementById('minuto').style.transform = `rotate(${gradosMinutos}deg)`;
+      document.getElementById('hora').style.transform = `rotate(${gradosHoras}deg)`;
+    }
+
+    setInterval(actualizarReloj, 1000);
+    actualizarReloj();
+  </script>
+
+</body>
+</html>
+

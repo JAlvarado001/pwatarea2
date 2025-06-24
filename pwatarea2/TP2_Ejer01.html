@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cambio de Estilo al Clic</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background-image: url('fondoazul.png'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+   
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 150px;
+    }
+
+   
+    .titulo-central {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+  
+    .contenedor {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      gap: 40px;
+      padding-top: 100px; 
+    }
+
+    h1 {
+      color: rgb(19, 18, 18);
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+
+    #miElemento {
+      width: 300px;
+      height: 150px;
+      line-height: 150px;
+      color: white;
+      background-color: #3498db;
+      border-radius: 10px;
+      font-size: 24px;
+      transition: background-color 0.5s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 28px;
+      background-color: #2ecc71;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+
+ 
+  <img src="ube.png" alt="Logo de la empresa" class="logo">
+
+ 
+  <div class="titulo-central">TAREA PRACTICA 2 - EJERCICIO 01 -JOHNNY ALVARADO</div>
+
+  <div class="contenedor">
+    <h1>Cambio de Estilo al Clic</h1>
+    <div id="miElemento">Soy un elemento</div>
+    <button id="btnCambiar">Cambiar color de fondo</button>
+  </div>
+
+  <script>
+    const miElemento = document.getElementById('miElemento');
+    const btn = document.getElementById('btnCambiar');
+
+    const colores = ['#3498db', '#e74c3c', '#9b59b6', '#f39c12', '#2ecc71'];
+    let indiceColor = 0;
+
+    btn.addEventListener('click', () => {
+      indiceColor = (indiceColor + 1) % colores.length;
+      miElemento.style.backgroundColor = colores[indiceColor];
+    });
+  </script>
+
+</body>
+</html>

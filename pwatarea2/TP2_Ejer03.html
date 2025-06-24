@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cambio de Imagen al Pasar el Ratón</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background-image: url('fondo3.jpg'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 150px;
+    }
+
+    .titulo-central {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: #000;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    #imagen {
+      width: 600px;
+      height: 500px;
+      transition: opacity 0.5s ease;
+      cursor: pointer;
+      display: block;
+      margin: 150px auto 0 auto;
+      border: 2px solid #333;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <img src="ube.png" alt="Logo de la empresa" class="logo">
+
+  <!-- Título -->
+  <div class="titulo-central">Tarea Práctica 2 - Ejercicio 03  - Johnny Alvarado</div>
+
+  <!-- Imagen con src inicial -->
+  <img
+    id="imagen"
+    src="https://www.unir.net/wp-content/uploads/2024/02/La-importancia-de-la-programacion-segura-o-desarrollo-seguro-de-software.jpg"
+    alt="Imagen inicial"
+  />
+
+  <script>
+    const imagen = document.getElementById('imagen');
+
+    // URLs de las imágenes
+    const imgOriginal = "https://cms.usanmarcos.ac.cr/sites/default/files/styles/large/public/2024-08/que-son-los-lenguajes-de-programacion.png?itok=gV4DZw6r";
+    const imgHover    = "https://fundaciontelefonica.com.ec/wp-content/uploads/2024/12/Programacion_01.jpg" ;
+
+    // Al pasar el ratón
+    imagen.addEventListener('mouseenter', () => {
+      imagen.style.opacity = 0;
+      setTimeout(() => {
+        imagen.src = imgHover;
+        imagen.style.opacity = 1;
+      }, 300);
+    });
+
+    // Al quitar el ratón
+    imagen.addEventListener('mouseleave', () => {
+      imagen.style.opacity = 0;
+      setTimeout(() => {
+        imagen.src = imgOriginal;
+        imagen.style.opacity = 1;
+      }, 300);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora Simple</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background-image: url('fondocal.png'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Logo */
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 150px;
+    }
+
+    /* Título centrado */
+    .titulo-central {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: #f3eeee;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    /* Contenedor principal */
+    .contenedor {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding-top: 80px;
+    }
+
+    .calculadora {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      height: 40px;
+      font-size: 24px;
+      text-align: right;
+      margin-bottom: 15px;
+      padding: 5px 10px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    .botones {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      user-select: none;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    button.operador {
+      background-color: #e67e22;
+    }
+
+    button.operador:hover {
+      background-color: #d35400;
+    }
+
+    button.borrar {
+      background-color: #e74c3c;
+    }
+
+    button.borrar:hover {
+      background-color: #c0392b;
+    }
+
+    #btnEqual {
+      background-color: #27ae60;
+    }
+
+    #btnEqual:hover {
+      background-color: #1e8449;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <img src="ube.png" alt="Logo de la empresa" class="logo">
+
+  <!-- Título -->
+  <div class="titulo-central">TAREA PRÁCTICA 3 - Ejercicio 02  - Johnny Alvarado </div>
+
+  <!-- Contenido principal -->
+  <div class="contenedor">
+    <div class="calculadora">
+      <input type="text" id="display" readonly />
+
+      <div class="botones">
+        <button class="borrar" id="btnClear">C</button>
+        <button id="btnDivide" class="operador">/</button>
+        <button id="btnMultiply" class="operador">*</button>
+        <button id="btnBackspace">←</button>
+
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button id="btnMinus" class="operador">-</button>
+
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button id="btnPlus" class="operador">+</button>
+
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button id="btnEqual" style="grid-row: span 2;">=</button>
+
+        <button style="grid-column: span 2;">0</button>
+        <button>.</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+    const botones = document.querySelectorAll('.botones button');
+
+    botones.forEach(boton => {
+      boton.addEventListener('click', () => {
+        const valor = boton.textContent;
+
+        if (boton.id === 'btnClear') {
+          display.value = '';
+          return;
+        }
+
+        if (boton.id === 'btnBackspace') {
+          display.value = display.value.slice(0, -1);
+          return;
+        }
+
+        if (boton.id === 'btnEqual') {
+          try {
+            display.value = eval(display.value);
+          } catch (error) {
+            display.value = 'Error';
+          }
+          return;
+        }
+
+        // Evitar que se inicie con operador excepto -
+        if (display.value === '' && ['+', '*', '/'].includes(valor)) {
+          return;
+        }
+
+        // Evitar operadores dobles
+        const ultChar = display.value.slice(-1);
+        const operadores = ['+', '-', '*', '/'];
+        if (operadores.includes(valor) && operadores.includes(ultChar)) {
+          display.value = display.value.slice(0, -1) + valor;
+          return;
+        }
+
+        display.value += valor;
+      });
+    });
+  </script>
+
+</body>
+</html>
