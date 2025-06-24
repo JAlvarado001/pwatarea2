@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Temporizador de Cuenta Regresiva</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('reloj.jpg'); /* ← imagen de fondo */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 99vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 100px;
+    }
+
+    .titulo-central {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: #f1eded;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+      z-index: 10;
+    }
+
+    .temporizador {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px 60px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    #tiempo {
+      font-size: 48px;
+      color: #007bff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo y título -->
+  <img src="ube.png" alt="Logo" class="logo">
+  <div class="titulo-central">TAREA PRÁCTICA 2 - EJERCICIO 09 - JOHNNY ALVARADO</div>
+
+  <div class="temporizador">
+    <h1>Cuenta Regresiva</h1>
+    <div id="tiempo">00:00:00</div>
+  </div> 
+
+  <script>
+    // Tiempo de inicio: 10 minutos (en segundos)
+    let tiempoRestante = 10 * 60;
+
+    function actualizarTemporizador() {
+      const minutos = Math.floor(tiempoRestante / 60);
+      const segundos = tiempoRestante % 60;
+      const horas = Math.floor(minutos / 60);
+      const min = minutos % 60;
+
+      // Formato HH:MM:SS
+      const formato = 
+        String(horas).padStart(2, '0') + ":" +
+        String(min).padStart(2, '0') + ":" +
+        String(segundos).padStart(2, '0');
+
+      document.getElementById("tiempo").textContent = formato;
+
+      if (tiempoRestante > 0) {
+        tiempoRestante--;
+      } else {
+        clearInterval(cuentaAtras);
+        document.getElementById("tiempo").textContent = "¡Tiempo terminado!";
+      }
+    }
+
+    const cuentaAtras = setInterval(actualizarTemporizador, 1000);
+    actualizarTemporizador();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrusel de Imágenes</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-image: url('fondocarrusel.jpg'); /* ← imagen de fondo */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 100px;
+    }
+
+    .titulo-central {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: bold;
+      color: #131212;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+      z-index: 10;
+    }
+
+    p {
+      font-size: 18px;
+      color: #fff;
+      max-width: 700px;
+      text-align: center;
+      margin: 15px 0;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .carrusel {
+      width: 600px;
+      height: 400px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .imagenes {
+      display: flex;
+      width: max-content;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .imagenes img {
+      width: 600px;
+      height: 400px;
+    }
+
+    .boton {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 30px;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1;
+      border-radius: 50%;
+    }
+
+    .boton:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .anterior {
+      left: 10px;
+    }
+
+    .siguiente {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo y título -->
+  <img src="ube.png" alt="Logo" class="logo" />
+  <div class="titulo-central">TAREA PRÁCTICA 2 - EJERCICIO 08 - JOHNNY ALVARADO</div>
+
+  <!-- Párrafo superior -->
+  <p>Bienvenido a nuestra galería interactiva.</p>
+
+  <!-- Carrusel -->
+  <div class="carrusel">
+    <div class="imagenes" id="imagenes">
+      <img src="https://www.fcme.com.ec/wp-content/uploads/logo-UBE.png" alt="Imagen 1" />
+      <img src="https://www.algotive.ai/hubfs/00%20Blog/08%20Sistemas%20Inteligentes/Usos-de-Sistemas-Inteligentes-en-la-Actualidad1.png" alt="Imagen 2" />
+      <img src="https://www.unir.net/wp-content/uploads/sites/22/2022/03/engineer-touch-screen-control-robot-the-production-of-factory-parts-picture-id1041132512.jpg" alt="Imagen 3" />
+      <img src="https://ecotec.edu.ec/content/uploads/oferta-academica/grado/carrera-de-mecatronica-en-ecuador.jpg" alt="Imagen 4" />
+      <img src="https://www.emagister.com/es/albums/9/2/0/6/2/xxl_cropped_507bfdddcf521053283431229578928a.jpg" alt="Imagen 5" />
+      <img src="https://www.dointech.com.co/blog/wp-content/uploads/2015/03/edificio-inteligente.jpg" alt="Imagen 6" />
+      <img src="https://iccsi.com.ar/wp-content/uploads/cual-es-la-diferencia-entre-inteligencia-artificial-y-sistema-de-inteligencia.webp" alt="Imagen 7" />
+      <img src="https://i0.wp.com/ticsyformacion.com/wp-content/uploads/2014/04/infografia_sistemas_inteligentes.jpg?ssl=1" alt="Imagen 8" />
+      <img src="https://www.algotive.ai/hs-fs/hubfs/00%20Blog/08%20Sistemas%20Inteligentes/APLICACIONES%20DE%20LOS%20SISTEMAS%20INTELIGENTES-01-1.png?width=800&name=APLICACIONES%20DE%20LOS%20SISTEMAS%20INTELIGENTES-01-1.png" alt="Imagen 9" />
+    </div>
+    <button class="boton anterior" onclick="moverCarrusel(-1)">❮</button>
+    <button class="boton siguiente" onclick="moverCarrusel(1)">❯</button>
+  </div>
+
+  <!-- Párrafo inferior -->
+  <p>¡Esperamos que disfrutes del recorrido visual!</p>
+
+  <script>
+    let indice = 0;
+    function moverCarrusel(direccion) {
+      const carrusel = document.getElementById("imagenes");
+      const total = carrusel.children.length;
+      indice += direccion;
+      if (indice < 0) indice = total - 1;
+      else if (indice >= total) indice = 0;
+      carrusel.style.transform = `translateX(-${indice * 600}px)`;
+    }
+  </script>
+
+</body>
+</html>

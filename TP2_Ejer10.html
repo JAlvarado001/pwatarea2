@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Interactivo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 150px;
+    }
+
+    .titulo-central {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 30px;
+      font-weight: bold;
+      color: #141414;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    }
+
+    .tarjeta {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 400px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .btn-opcion {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #3498db;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn-opcion:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-correcto {
+      background-color: #2ecc71 !important;
+    }
+
+    .btn-incorrecto {
+      background-color: #e74c3c !important;
+    }
+
+    #mensaje {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    #resultado {
+      margin-top: 25px;
+      font-size: 20px;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo y título -->
+  <img src="ube.png" alt="Logo" class="logo">
+  <div class="titulo-central">TAREA PRÁCTICA 2 - EJERCICIO 10 - JOHNNY ALVARADO</div>
+
+  <div class="tarjeta">
+    <h2 id="pregunta">Cargando pregunta...</h2>
+    <div id="opciones"></div>
+    <div id="mensaje"></div>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    const preguntas = [
+      {
+        texto: "¿Qué planeta es conocido como el planeta rojo?",
+        opciones: ["Marte", "Júpiter", "Saturno", "Venus"],
+        correcta: 0
+      },
+      {
+        texto: "¿Cuántos lados tiene un hexágono?",
+        opciones: ["5", "6", "8", "7"],
+        correcta: 1
+      },
+      {
+        texto: "¿Quién escribió 'Don Quijote de la Mancha'?",
+        opciones: ["Cervantes", "Borges", "Shakespeare", "García Márquez"],
+        correcta: 0
+      }
+    ];
+
+    let indice = 0;
+    let puntuacion = 0;
+
+    function cargarPregunta() {
+      document.getElementById("mensaje").textContent = "";
+      document.getElementById("resultado").textContent = "";
+
+      const pregunta = preguntas[indice];
+      document.getElementById("pregunta").textContent = pregunta.texto;
+
+      const contenedor = document.getElementById("opciones");
+      contenedor.innerHTML = "";
+
+      pregunta.opciones.forEach((opcion, i) => {
+        const btn = document.createElement("button");
+        btn.className = "btn-opcion";
+        btn.textContent = opcion;
+        btn.onclick = () => verificarRespuesta(i, btn);
+        contenedor.appendChild(btn);
+      });
+    }
+
+    function verificarRespuesta(seleccion, boton) {
+      const correcta = preguntas[indice].correcta;
+      const botones = document.querySelectorAll(".btn-opcion");
+
+      botones.forEach(b => b.disabled = true);
+
+      if (seleccion === correcta) {
+        boton.classList.add("btn-correcto");
+        document.getElementById("mensaje").textContent = "¡Correcto!";
+        puntuacion++;
+      } else {
+        boton.classList.add("btn-incorrecto");
+        botones[correcta].classList.add("btn-correcto");
+        document.getElementById("mensaje").textContent = "Respuesta incorrecta.";
+      }
+
+      setTimeout(() => {
+        indice++;
+        if (indice < preguntas.length) {
+          cargarPregunta();
+        } else {
+          document.getElementById("pregunta").textContent = "Juego terminado";
+          document.getElementById("opciones").innerHTML = "";
+          document.getElementById("mensaje").textContent = "";
+          document.getElementById("resultado").textContent =
+            `Puntuación final: ${puntuacion} / ${preguntas.length}`;
+        }
+      }, 2000);
+    }
+
+    cargarPregunta();
+  </script>
+
+</body>
+</html>
+
+

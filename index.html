@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<style> 
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo general */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f4f8;
+  padding: 30px;
+  color: #333;
+}
+
+/* Encabezado */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2em;
+  color: #004080;
+}
+
+.logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      height: 150px;
+    }
+
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  color: #004080;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.card span {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.card:hover {
+  background-color: #e0efff;
+  transform: translateY(-5px);
+}
+/* PIE DE PÁGINA */
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #004080;
+  color: white;
+  margin-top: 20px;
+}
+
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi PAGINA COMPLETA</title>
+ <link rel="stylesheet" href="cssindex.css">
+</head>
+<body>
+ <img src="ube.png" alt="Logo de la empresa" class="logo">
+  <header>
+    <h1>📘 Menú de Ejercicios HTML & CSS</h1>
+  </header>
+
+  <section class="menu-grid">
+    <a href="TP2_Ejer01.html" class="card">Ejercicio 1<br><span>Cambio de Estilo al Clic</span></a>
+    <a href="TP2_Ejer02.html" class="card">Ejercicio 2<br><span>Calculadora Simple</span></a>
+    <a href="TP2_Ejer03.html" class="card">Ejercicio 3<br><span>Cambio de Imagen al Pasar el Ratón</span></a>
+    <a href="TP2_Ejer04.html" class="card">Ejercicio 4<br><span>Reloj Analógico con Números</span></a>
+    <a href="TP2_Ejer05.html" class="card">Ejercicio 5<br><span>Validación de Formulario</span></a>
+    <a href="TP2_Ejer06.html" class="card">Ejercicio 6<br><span>Lista de Tareas</span></a>
+    <a href="TP2_Ejer07.html" class="card">Ejercicio 7<br><span>Menú Desplegable</span></a>
+    <a href="TP2_Ejer08.html" class="card">Ejercicio 8<br><span>Carrusel de Imágenes</span></a>
+    <a href="TP2_Ejer09.html" class="card">Ejercicio 9<br><span>Temporizador de Cuenta Regresiva</span></a>
+    <a href="TP2_Ejer10.html" class="card">Ejercicio 10<br><span>Quiz Interactivo</span></a>
+  </section>
+
+<footer>
+    <p>&copy; 2025 Johnny Alvarado. Todos los derechos reservados.</p>
+  </footer>
+    
+
+
+</body>
+</html>
+
